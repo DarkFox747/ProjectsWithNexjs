@@ -8,16 +8,15 @@ import '../app/globals.css';
 
 export default function Home() {
   
-  const [ingredients, setIngredients] = useState<string[]>(["Chicken", "Oregano", "Tomatoes"]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newIngredient = formData.get("ingredient") as string;
+  function handleSubmit(formData: FormData) {    
+   
+    const newIngredient = formData.get("ingredient") as string ;
 
     if (newIngredient && !ingredients.includes(newIngredient)) {
       setIngredients([...ingredients, newIngredient]);
-      event.currentTarget.reset(); 
+      
     }
   }
 
@@ -27,7 +26,7 @@ export default function Home() {
 
 
       <main className="flex flex-col items-center justify-center h-screen ">
-        <form onSubmit={handleSubmit} className="add-ingredient-form flex flex-col gap-4 items-center w-full max-w-md">
+        <form action={handleSubmit} className="add-ingredient-form flex flex-col gap-4 items-center w-full max-w-md">
           <input 
             type="text"
             placeholder="e.g. oregano"
