@@ -25,7 +25,7 @@ export default function Home() {
       <Header />
 
 
-      <main className="flex flex-col items-center justify-center h-screen ">
+      <main className="flex flex-col items-center justify-start min-h-screen pt-8">
         <form action={handleSubmit} className="add-ingredient-form flex flex-col gap-4 items-center w-full max-w-md">
           <input 
             type="text"
@@ -38,13 +38,23 @@ export default function Home() {
             Add ingredient
           </button>
         </form>
-        <h2 className="text-2xl font-semibold mt-8">Ingredients</h2>
-        <ul className="w-full max-w-md mt-4">
-          {ingredients.map((ingredient) => (
-            <li key={ingredient} className="p-2 border-b border-gray-300">{ingredient}</li>
-          ))}
-        </ul>
-      </main>    
+  {ingredients.length>0 &&<section>
+          <h2 className="text-2xl font-semibold mt-8">Ingredients on hand:</h2>
+          <ul className="w-full max-w-md mt-4">
+            {ingredients.map((ingredient) => (
+              <li key={ingredient} className="p-2 border-b border-gray-300">{ingredient}</li>
+            ))}
+          </ul>
+                  {ingredients.length>=3 &&<div className="get-recipe-container">
+                      <div>
+                          <h3>Ready for a recipe?</h3>
+                          <p>Generate a recipe from your list of ingredients.</p>
+                      </div>
+                      <button>Get a recipe</button>
+                  </div>}
+              </section>}
+
+        </main>    
     </>
   );
 }
